@@ -1,7 +1,7 @@
 pipeline {
     agent {label "mnp-tech"}
     stages {
-        stage('Hello') {
+        stage('git clone') {
             steps {
                 checkout scm
             }
