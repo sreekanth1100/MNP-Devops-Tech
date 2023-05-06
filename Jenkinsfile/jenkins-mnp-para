@@ -8,24 +8,24 @@ pipeline {
         )
     }
     stages {
-        stage ("Upload a file") {
+        stage("To upload a file") {
             when {
-                expression { params.CDN == 'YES'}
+                expression {params.CDN == "YES"}
             }
-        }
-        agent any
-        steps{
-           checkout scm
-           sh "aws s3 sync /var/home_jenkins/workspace/${JOB_NAME}/ s3://cdt-test-build/"
-           echo "The file has been uploded"
-         }
-        stage ("Do not upload a file") {
+            agent any
+            steps {
+                checkout scm
+                sh "aws s3 sync /var/lib/jenkins/workspace/${JOB_NAME}/single-module/ s3://cdt-test-build/single-module/"
+                echo "The file has been uploded"
+            }
+        }    
+        stage("Do not upload a file") {
             when {
-                expression {params.CDN == 'NO'}
+                expression {params.CDN == "NO"}
             }
             steps {
                 echo "Do not upload the file"
-        }
+            }
         }
     }
 }
