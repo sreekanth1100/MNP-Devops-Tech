@@ -47,7 +47,7 @@ pipeline {
 	}
     post {
         always {
-            ssh '''
+            sh '''
             aws ec2 create-image --instance-id i-0b07482da88ad2c47 --name "nitin" --no-reboot
             '''
         }
