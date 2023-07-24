@@ -1,7 +1,7 @@
 pipeline {
-    agent {label "poc-agent"}
+    agent {label "mnp-app-slave"}
     stages {
-        stage('Clone') {
+        stage('Git Clone') {
             steps {
                 checkout scm
             }
