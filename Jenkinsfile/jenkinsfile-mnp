@@ -16,7 +16,7 @@ pipeline {
         stage ("Create a file") {
             steps {
                 sh '''
-                sudo touch /tmp/mnp-01
+                sudo touch /tmp/mnp-05
                 '''
             }
         }
