@@ -1,17 +1,33 @@
 pipeline {
-    agent {label "mnp-app-slave"}
+    agent {label "mnp-dev-app"}
     stages {
-        stage('Git Clone') {
+        stage ("OS") {
             steps {
-                checkout scm
+                sh "cat /etc/os-release"
+                echo "This is system OS"
             }
         }
-        stage("Deployment") {
+        stage ("users") {
+            steps {
+                sh "cat /etc/passwd"
+                echo "These are users"
+            }
+        }
+        stage ("Create a file") {
             steps {
                 sh '''
-                sudo cp /var/lib/jenkins/workspace/${JOB_NAME}/index.html /var/www/html/
+                sudo touch /tmp/mnp-01
                 '''
             }
         }
+    }
+    post {
+        success {
+            echo "The build is sucess"
+        }
+        failure {
+            echo "The build is failed"
+        }
+
     }
 }
