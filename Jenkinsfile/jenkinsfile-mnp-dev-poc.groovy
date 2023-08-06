@@ -1,0 +1,33 @@
+pipeline {
+    agent {label "mnp-dev-app"}
+    stages {
+        stage ("OS") {
+            steps {
+                sh "cat /etc/os-release"
+                echo "This is system OS"
+            }
+        }
+        stage ("users") {
+            steps {
+                sh "cat /etc/passwd"
+                echo "These are users"
+            }
+        }
+        stage ("Create a file") {
+            steps {
+                sh '''
+                sudo touch /tmp/mnp-01
+                '''
+            }
+        }
+    }
+    post {
+        success {
+            echo "The build is sucess"
+        }
+        failure {
+            echo "The build is failed"
+        }
+
+    }
+}
